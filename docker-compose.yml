@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  web:
+    image: phiroict/node-impl:20170528
+    ports:
+      - "3000"
+    networks:
+      my-app-frontend:
+        aliases:
+          - frontend.local.network
+      my-app-backend:
+        aliases:
+          - backend.local.network
+    deploy:
+      replicas: 4
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+  percona-xtradb-cluster:
+    image: percona/percona-xtradb-cluster:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      CLUSTER_NAME: cluster1
+      XTRABACKUP_PASSWORD: Theistare
+    networks:
+      my-app-backend:
+        aliases:
+          - backend.local.network
+    ports:
+      - "3306"
+    volumes:
+      # create volumes for use
+      - /var/lib/mysql
+      - /var/log/mysql
+      # bind mount my local my.cnf
+      - /home/phiro/IdeaProjects/Webservice/my.cnf:/etc/mysql/my.cnf
+           #command:
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+networks:
+  my-app-frontend:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
+  my-app-backend:
+    driver: overlay

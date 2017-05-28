@@ -1,0 +1,32 @@
+docker swarm join \
+    --token SWMTKN-1-2ds7so6gmvah4bbm8oj88s320d65vcpwiiqbxzc27fi6yfeeif-ey3sk06cts6d2j9xsx7uj63p7 \
+    192.168.2.101:2377
+
+docker stack deploy --compose-file docker-compose.yml stackdemo
+
+docker stack rm stackdemo
+
+
+Access by the gateway
+http://172.18.0.1:3000/
+
+
+phiro@debian:~/IdeaProjects/Webservice$ docker push phiroict/node-impl:20170528
+The push refers to a repository [docker.io/phiroict/node-impl]
+00a737627302: Pushed
+56294d8bc0d3: Pushed
+1401ca6a0a58: Pushed
+b3a7b8526364: Pushed
+3fb66f713c9f: Pushed
+20170528: digest: sha256:1ee08b5446220656b7ab4f5c633b89d2b0c54d576e2a7e6473417359ca9cdf9e size: 1368
+
+Update
+phiro@debian:~/IdeaProjects/Webservice$ docker push phiroict/node-impl:20170528
+The push refers to a repository [docker.io/phiroict/node-impl]
+e268a346d382: Pushed
+56294d8bc0d3: Layer already exists
+1401ca6a0a58: Layer already exists
+b3a7b8526364: Layer already exists
+3fb66f713c9f: Layer already exists
+20170528: digest: sha256:c26744ba039f87ac4c5da443e18d507a1b65a1af0a3f54aefc5eca9cc6e79b06 size: 1368
+
