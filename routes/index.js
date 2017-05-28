@@ -30,7 +30,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 });
 
 var connection = mysql.createConnection({
-    host: 'backend.local.network',
+    host: '10.0.0.3',
     user: 'root',
     password: 'secret',
     database: 'information_schema'
