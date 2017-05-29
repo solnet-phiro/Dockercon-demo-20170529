@@ -7,6 +7,8 @@ var mysql = require('mysql');
 var ifaces = os.networkInterfaces();
 var networks = "";
 var records = -1;
+var change_me = "Monkey";
+
 Object.keys(ifaces).forEach(function (ifname) {
     var alias = 0;
 
@@ -30,7 +32,7 @@ Object.keys(ifaces).forEach(function (ifname) {
 });
 
 var connection = mysql.createConnection({
-    host: '10.0.0.3',
+    host: 'backend.local.network',
     user: 'root',
     password: 'secret',
     database: 'information_schema'
@@ -39,7 +41,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) {
         console.error('error connecting: ' + err.stack);
-        records = err.stack;
+        records = 20;
         return;
     }
 
@@ -56,7 +58,8 @@ router.get('/', function (req, res, next) {
         title: 'Express',
         hostname: os.hostname(),
         ipaddress: networks,
-        numberRecords: records
+        numberRecords: records,
+        changeme: change_me
     });
 });
 

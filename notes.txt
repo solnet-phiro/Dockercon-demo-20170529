@@ -7,6 +7,9 @@ docker swarm join \
     --token SWMTKN-1-4bnti04xfttl1mpgu20y4te3szpcajzfaxhk63zzd9w6oxgbxc-esn8pjgvfev05kjmawutrhg1e \
     192.168.2.101:2377
 
+ docker swarm join \
+    --token SWMTKN-1-2gkcr8bri8toehdz8500ia3kznw2quk3xdyvi0xuh0fxyqok4b-eno06arc7x2zb8ddl5xazu4ay \
+    10.2.41.15:2377
 
 
 docker stack deploy --compose-file docker-compose.yml stackdemo
